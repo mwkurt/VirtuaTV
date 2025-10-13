@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings>
+    <category label="General">
+        <setting type="action" id="create_channel" label="Create a New Channel" action="RunPlugin(plugin://plugin.video.virtuatv/?action=create_channel)" />
+        <setting type="action" id="delete_channel" label="Delete a Channel" action="RunPlugin(plugin://plugin.video.virtuatv/?action=delete_channel)" />
+        <setting type="action" id="regenerate_channels" label="Regenerate All Channels" action="RunPlugin(plugin://plugin.video.virtuatv/?action=regenerate_channels)" />
+        <setting type="action" id="delete_all_channels" label="Delete All Channels" action="RunPlugin(plugin://plugin.video.virtuatv/?action=delete_all_channels)" />
+        <setting type="action" id="backup_addon" label="Backup Addon" action="RunPlugin(plugin://plugin.video.virtuatv/?action=backup_addon)" />
+        <setting type="action" id="restore_addon" label="Restore Addon" action="RunPlugin(plugin://plugin.video.virtuatv/?action=restore_addon)" />
+        <setting type="action" id="edit_channel" label="Edit Channel" action="RunPlugin(plugin://plugin.video.virtuatv/?action=edit_channel)" />
+    </category>
+    <category label="Globals">
+        <setting id="shared_folder" type="folder" label="M3U/XMLTV Storage Folder" default="" />
+        <setting id="clear_shared_folder" type="action" label="Clear Shared Folder" action="RunPlugin(plugin://plugin.video.virtuatv/?action=clear_shared_folder)" />
+        <setting id="max_playlist_items" type="number" label="Max Items per Generated Playlist" default="1000" />
+        <setting id="max_playlist_duration" type="number" label="Max Duration per Generated Playlist (hours)" default="168" />
+        <setting id="number_of_channels" type="number" label="Max Number of Channels" default="50" />
+        <setting id="auto_regen" type="bool" label="Enable Auto Regeneration" default="false" />
+        <setting id="auto_regen_interval" type="number" label="Auto Regen Check Interval (minutes)" default="60" />
+        <setting id="auto_regen_threshold" type="number" label="Auto Regen Threshold (hours left)" default="12" />
+        <setting id="service_mode" type="enum" label="Service Mode" default="0" values="Background Service|Addon Service|Disabled" />
+        <setting id="log_level" type="enum" label="Logging Level" values="verbose|info|none" default="1" />
+        <setting id="ffprobe_path" type="text" label="FFProbe Binary Path" default="" option="hidden" visible="false" />
+        <setting id="ffprobe_select_path" type="text" label="Current FFProbe Path" default="Not set" option="readonly" visible="true" help="Current path to the ffprobe binary (read-only). Use 'Select FFProbe Path' to change it." />
+        <setting id="select_ffprobe_path" type="action" label="Select FFProbe Path" action="RunPlugin(plugin://plugin.video.virtuatv/?action=select_ffprobe_path)" help="Open a file browser to select the ffprobe binary (part of FFmpeg)." />
+        <setting id="rescan_days" type="number" label="Rescan Interval (days)" default="7" />
+        <setting id="rescan_durations_action" type="action" label="Rescan Folder Durations" action="RunPlugin(plugin://plugin.video.virtuatv/?action=rescan_durations)" />
+        <setting id="sync_interval" type="number" label="Sync Interval (seconds)" default="60" />
+        <setting id="notify" type="bool" label="Show startup notification" default="true"/>
+    </category>
+    <category label="Database">
+        <setting id="db_host" type="text" label="Database Host (leave empty for local SQLite)" default="" />
+        <setting id="db_port" type="number" label="Database Port" default="3306" />
+        <setting id="db_user" type="text" label="Database User" default="" />
+        <setting id="db_pass" type="text" label="Database Password" default="" option="hidden" />
+        <setting id="db_name" type="text" label="Database Name" default="MyVideos131" />
+    </category>
+</settings>

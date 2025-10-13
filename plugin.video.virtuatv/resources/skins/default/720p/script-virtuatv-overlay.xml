@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <controls>
+        <control type="group">
+            <visible>Player.HasVideo + !Window.IsActive(videoosd) + ![Player.Seeking | Player.Paused | Player.Forwarding | Player.Rewinding | Player.DisplayAfterSeek | Player.IsTempo]</visible>
+            <control type="image" id="3000">
+                <description>Channel Icon</description>
+                <left>20</left>
+                <top>20</top>
+                <width>100</width>
+                <height>100</height>
+                <aspectratio>keep</aspectratio>
+            </control>
+        </control>
+    </controls>
+</window>
