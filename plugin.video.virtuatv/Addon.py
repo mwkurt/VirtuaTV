@@ -1240,15 +1240,16 @@ def update_channel_files(channel_number):
                     if item_name in item_groups:
                         sorted_item_groups[item_name] = item_groups[item_name]
                         if playlist_type == 'episodes' and source == 'playlist':
-                            if item_name not in playlist['random_order'] or not playlist['random_order'][item_name]:
+                            if is_random and (item_name not in playlist['random_order'] or not playlist['random_order'][item_name]):
                                 playlist['random_order'][item_name] = list(range(len(item_groups[item_name]['items'])))
                                 random.shuffle(playlist['random_order'][item_name])
                                 virtu_log(f"Generated random order for {item_name} in playlist {playlist['path']}: {playlist['random_order'][item_name]}", virtu_logINFO)
-                            sorted_item_groups[item_name]['items'] = [
-                                sorted_item_groups[item_name]['items'][i] for i in playlist['random_order'][item_name]
-                            ]
-                        elif playlist_type == 'episodes' and source == 'playlist':
-                            sorted_item_groups[item_name]['items'].sort(key=lambda x: (int(x.get('season', 1)), int(x.get('episode', 1))))
+                            if is_random:
+                                sorted_item_groups[item_name]['items'] = [
+                                    sorted_item_groups[item_name]['items'][i] for i in playlist['random_order'][item_name]
+                                ]
+                            else:
+                                sorted_item_groups[item_name]['items'].sort(key=lambda x: (int(x.get('season', 1)), int(x.get('episode', 1))))
                         virtu_log(f"Playlist {playlist['path']} group {item_name} has {len(sorted_item_groups[item_name]['items'])} {'episodes' if playlist_type == 'episodes' else 'movies'}", virtu_logINFO)
                 all_playlists.append({
                     'items': sorted_item_groups,
@@ -1449,8 +1450,9 @@ def update_channel_files(channel_number):
                 virtu_log(f"Error saving updated last_index for channel {channel_name}: {str(e)}", virtu_logERROR)
                 progress_dialog.close()
                 return False
+            existing_m3u_lines = m3u_lines  # Use original m3u_lines from file
             m3u_lines = ['#EXTM3U']
-            for line in m3u_lines[removed_k*2+1:]:
+            for line in existing_m3u_lines[removed_k*2+1:]:
                 m3u_lines.append(line)
             playlist_type = all_playlists[0]['type'] if all_playlists else 'movies'
             for item_name, item in interleaved_track_new:
